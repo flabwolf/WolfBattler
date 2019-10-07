@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <title>人狼バトラー</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1>人狼バトラーⅠ（仮）</h1>
+    </div>
+    <div class="main">
+        <div class="contents">
+            <div class="create_room">
+                <a href="#">ルーム作成</a>
+                <form method="GET" action="room.html">
+                    <input type="text" name="room_name">
+                    <input type="submit" value="作成">
+                </form>
+            </div>
+            <div class="join_room">
+                <a href="#">ルームを見る</a>
+                <form method="GET" action="room.html">
+                    <select name="room_name">
+                        <option value="1">ルーム1</option>
+                        <option value="2">ルーム2</option>
+                    </select>
+                    <input type="submit" value="参加">
+                    <input type="submit" value="観戦">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
