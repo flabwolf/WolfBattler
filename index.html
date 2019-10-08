@@ -3,26 +3,40 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <title>人狼バトラー</title>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/index.js"></script>
+    <title>人狼バトラー（仮）</title>
 </head>
 
 <body>
     <div class="header">
-        <h1>人狼バトラーⅠ（仮）</h1>
+        <!-- プレイヤー名表示 -->
+        <h2 id="player_name"></h2>
     </div>
     <div class="main">
+        <div class=title>
+            <h1>人狼バトラーⅠ（仮）</h1>
+        </div>
         <div class="contents">
+            <div class="create_player">
+                <a href="#">プレイヤー名</a>
+                <!-- プレイヤー名の生成 -->
+                <form method="GET">
+                    <input type="text" name="player_name">
+                    <button id="create_player">作成</button>
+                </form>
+            </div>
             <div class="create_room">
                 <a href="#">ルーム作成</a>
-                <form method="GET" action="room.html">
+                <!-- ルームの生成 -->
+                <form action="htmls/room.html">
                     <input type="text" name="room_name">
-                    <input type="submit" value="作成">
+                    <button id="create_room">作成</button>
                 </form>
             </div>
             <div class="join_room">
                 <a href="#">ルームを見る</a>
-                <form method="GET" action="room.html">
+                <form method="GET" action="htmls/room.html">
                     <select name="room_name">
                         <option value="1">ルーム1</option>
                         <option value="2">ルーム2</option>
