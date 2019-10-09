@@ -23,6 +23,21 @@ def save_room():
 
 # save_room()
 
+# ルーム名の取得
+def get_room_name():
+    conn = sqlite3.connect('db/wolf_battler.db')
+    c = conn.cursor()
+    ret = {}
+    rooms = list(c.execute("SELECT name FROM rooms"))
+    for i in rooms:
+        room_id = list(
+            c.execute("SELECT id FROM rooms WHERE name='%s'" % i[0]))[0][0]
+        num_player = list(
+            c.execute("SELECT * FROM players WHERE room_id=%d" % room_id))
+        ret[i[0]] = len(num_player)
+    conn.close()
+    print(json.dumps(ret))
+
 # roomsに作成したルームを追加
 
 
@@ -134,3 +149,5 @@ if "func" in form:
             del_player(player_name, room_name)
         else:
             del_player(player_name)
+    elif func == "get_room_name":
+        get_room_name()

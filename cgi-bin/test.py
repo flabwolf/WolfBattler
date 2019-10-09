@@ -1,20 +1,23 @@
 import sqlite3
+import json
 
 
 def create_player(agent, name="Agent"):
     conn = sqlite3.connect('db/wolf_battler.db')
     c = conn.cursor()
-    player_name = name
-    agent_ids = []
-    ids = [1, 2, 3, 4, 5]
-    room_name = "神"
-    a = c.execute(
-        "SELECT players.name FROM players INNER join rooms ON players.room_id = rooms.id AND players.agent IS NULL AND rooms.name='%s'" % room_name)
-    for i in a:
+    ret = {}
+    rooms = list(c.execute("SELECT name FROM rooms"))
+    # print(list(rooms))
+    for i in rooms:
         print(i)
 
-    # conn.commit()
+        room_id = list(
+            c.execute("SELECT id FROM rooms WHERE name='%s'" % i[0]))[0][0]
+        num_player = list(
+            c.execute("SELECT * FROM players WHERE room_id=%d" % room_id))
+        ret[i[0]] = len(num_player)
     conn.close()
+    print(ret)
 
 
 create_player(1, "nakahara")
