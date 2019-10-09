@@ -3,7 +3,6 @@ import threading
 import requests
 import cgi
 
-
 class SocketServer():
     def __init__(self, host, port):
         self.host = host
@@ -63,10 +62,18 @@ class SocketServer():
                     except ConnectionResetError:
                         break
 
-
+"""
 if form["host"] and form["port"]:
     form = cgi.FieldStorage()
     host = form["host"]
     port = form["port"]
     ss = SocketServer(host, port)
+    ss.socket_server_up()
+"""
+
+#ローカル鯖で確認する用(上の分をコメントアウトして使っている)
+if __name__ == "__main__":
+    host = 'localhost'
+    port = 3000
+    ss = SocketServer(host,port)
     ss.socket_server_up()
