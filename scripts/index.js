@@ -1,6 +1,26 @@
 // 閉じるフラグ
 var flag = true;
 
+// サーバーを起動
+function start_server() {
+    $("#server_btn").on("click", function () {
+        $.ajax({
+            url: "server.php",
+            type: "POST",
+            data: {
+                "func": "start_server"
+            }
+        })
+            .done(function (data) {
+                console.log("サーバーを起動しました");
+                console.log(data);
+            })
+            .fail(function () {
+                console.log("失敗しました");
+            });
+    });
+}
+
 // プレイヤーをログアウトさせる
 function del_player() {
     $(window).on("beforeunload", function () {
@@ -133,6 +153,9 @@ function create_player() {
                 set_player_name();
                 show_contents();
                 hide_create_player();
+            })
+            .fail(function () {
+                console.log("プレイヤーの登録に失敗しました");
             });
     });
 }
@@ -211,6 +234,7 @@ window.onload = function () {
 }
 
 $(function () {
+    start_server();
     set_player_name();
     create_player();
     show_create_room();
