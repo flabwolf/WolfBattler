@@ -9,7 +9,7 @@ def create_player(agent, name="Agent"):
     ids = [1, 2, 3, 4, 5]
     room_name = "神"
     a = c.execute(
-        "SELECT players.agent FROM players INNER join rooms ON players.room_id = rooms.id and rooms.name='%s'" % room_name)
+        "SELECT players.name FROM players INNER join rooms ON players.room_id = rooms.id AND players.agent IS NULL AND rooms.name='%s'" % room_name)
     for i in a:
         print(i)
 
