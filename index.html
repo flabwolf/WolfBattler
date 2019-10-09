@@ -18,31 +18,25 @@
         <h2 id="player_name"></h2>
     </div>
     <div class="main">
+        <div class="create_player">
+            <div>プレイヤー名</div>
+            <!-- プレイヤー名の生成 -->
+            <form>
+                <input type="text" name="player_name">
+                <button id="create_player">作成</button>
+            </form>
+        </div>
         <div class="contents">
-            <div class="create_player">
-                <a href="#">プレイヤー名</a>
-                <!-- プレイヤー名の生成 -->
-                <form>
-                    <input type="text" name="player_name">
-                    <button id="create_player">作成</button>
-                </form>
-            </div>
+            <a href="" id="create_room_link">ルーム作成</a>
             <div class="create_room">
-                <a href="#">ルーム作成</a>
                 <!-- ルームの生成 -->
                 <form>
                     <input type="text" name="room_name">
                     <button id="create_room">作成</button>
                 </form>
             </div>
-            <div class="join_room">
-                <a href="#">ルームを見る</a>
-                <form>
-                    <select name="room_name" id="room_list"></select>
-                    <button id="enter_room">参加</button>
-                    <button id="view_room">観戦</button>
-                </form>
-            </div>
+            <a href="" id="join_room_link">ルームを見る</a>
+            <div class="join_room"></div>
         </div>
     </div>
 </body>

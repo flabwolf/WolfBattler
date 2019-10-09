@@ -49,6 +49,7 @@ function append_room() {
                 }
                 else {
                     $("#room_list").append("<option>" + room_name + "</option>");
+                    $(".join_room").append("<div class='content'><h3 class='room_name'>" + room_name + "</h3>" + "<h3 class='player_num'>" + "現在：" + data[room_name] + "人</h3>" + "<button class='enter_room_btn'>参加</button></div>");
                 }
 
             }
@@ -60,10 +61,13 @@ function append_room() {
 
 // ルームを選択する
 function select_room() {
-    $("#enter_room").on("click", function (e) {
-        e.preventDefault();
+    $(document).on("click", ".enter_room_btn", function () {
+        console.log("ok");
         var urlParams = new URLSearchParams(window.location.search);
-        var room_name = $("#room_list option:selected").text();
+        var room_name = $(this).parent().find(".room_name").text();
+        console.log("クリックされました");
+        console.log($(this));
+        console.log(room_name);
         var player_name = urlParams.get("player_name");
         var url = "htmls/room.html?room_name=" + room_name + "&player_name=" + player_name;
         flag = false;
@@ -127,6 +131,8 @@ function create_player() {
                 var path = location.pathname;
                 window.history.pushState(null, null, path + url);
                 set_player_name();
+                show_contents();
+                hide_create_player();
             });
     });
 }
@@ -141,14 +147,74 @@ function set_player_name() {
     }
 }
 
+
+function show_create_room() {
+    $("#create_room_link").on("click", function (e) {
+        e.preventDefault();
+        $(".create_room").show();
+        hide_join_room();
+    });
+}
+
+function show_join_room() {
+    $("#join_room_link").on("click", function (e) {
+        e.preventDefault();
+        $(".join_room").show();
+        // $("content").show();
+        hide_create_room();
+    });
+}
+
+function hide_create_room() {
+    $(".create_room").hide();
+}
+
+function hide_join_room() {
+    $(".join_room").hide();
+}
+
+function show_contents() {
+    $(".contents").show();
+}
+
+function hide_contents() {
+    $(".contents").hide();
+    hide_create_room();
+    hide_join_room();
+}
+
+function hide_create_player() {
+    $(".create_player").hide();
+}
+
+function show_create_player() {
+    $(".create_player").show();
+}
+
 // ページ読み込み時の動作
 window.onload = function () {
-    this.append_room();
+    var urlParams = new URLSearchParams(window.location.search);
+
+    // プレイヤーを登録していなかったら
+    if (urlParams.get(["player_name"]) == null) {
+        this.show_create_player();
+        hide_contents();
+        append_room();
+        console.log("プレイヤー名を入力してください。");
+    }
+    else {
+        this.append_room();
+        hide_create_player();
+        this.hide_join_room();
+        this.hide_create_room();
+    }
 }
 
 $(function () {
     set_player_name();
     create_player();
+    show_create_room();
+    show_join_room();
     create_room();
     select_room();
     del_player();
