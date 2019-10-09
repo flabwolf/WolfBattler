@@ -62,7 +62,6 @@ class SocketServer():
                     except ConnectionResetError:
                         break
 
-
 """
 if form["host"] and form["port"]:
     form = cgi.FieldStorage()
