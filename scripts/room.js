@@ -41,6 +41,8 @@ function set_player_name() {
     $("#player_name").html(player_name);
 }
 
+// ルームに参加する
+
 function join_room() {
     var urlParams = new URLSearchParams(window.location.search);
     var player_name = urlParams.get("player_name");
