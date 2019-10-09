@@ -63,6 +63,8 @@ function join_room() {
         });
 }
 
+// ルームを退出する
+
 function exit_room() {
     $("#exit_room").on("click", function (e) {
         e.preventDefault();

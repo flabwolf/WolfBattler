@@ -30,20 +30,17 @@
             <div class="create_room">
                 <a href="#">ルーム作成</a>
                 <!-- ルームの生成 -->
-                <form action="htmls/room.html">
+                <form>
                     <input type="text" name="room_name">
                     <button id="create_room">作成</button>
                 </form>
             </div>
             <div class="join_room">
                 <a href="#">ルームを見る</a>
-                <form method="GET" action="htmls/room.html">
-                    <select name="room_name">
-                        <option value="1">ルーム1</option>
-                        <option value="2">ルーム2</option>
-                    </select>
-                    <input type="submit" value="参加">
-                    <input type="submit" value="観戦">
+                <form>
+                    <select name="room_name" id="room_list"></select>
+                    <button id="enter_room">参加</button>
+                    <button id="view_room">観戦</button>
                 </form>
             </div>
         </div>
