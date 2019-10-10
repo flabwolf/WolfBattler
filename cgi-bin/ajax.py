@@ -38,6 +38,21 @@ def get_room_name():
     conn.close()
     print(json.dumps(ret))
 
+# プレイヤーの取得
+
+
+def get_player_name():
+    conn = sqlite3.connect('db/wolf_battler.db')
+    c = conn.cursor()
+    ret = {}
+    players = list(c.execute("SELECT name FROM players"))
+    for i in players:
+        player_id = list(
+            c.execute("SELECT id FROM players WHERE name='%s'" % i[0]))[0][0]
+        ret[i[0]] = player_id
+    conn.close()
+    print(json.dumps(ret))
+
 # roomsに作成したルームを追加
 
 
@@ -123,6 +138,22 @@ def del_player(player_name, room_name=False):
         del_room(room_name)
 
 
+def admin_del_room(room_name):
+    conn = sqlite3.connect('db/wolf_battler.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM rooms WHERE name='%s'" % room_name)
+    conn.commit()
+    conn.close()
+
+
+def admin_del_player(player_name):
+    conn = sqlite3.connect('db/wolf_battler.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM players WHERE name='%s'" % player_name)
+    conn.commit()
+    conn.close()
+
+
 # main関数部分
 form = cgi.FieldStorage()
 print(form.getfirst("room_name"), file=sys.stderr)
@@ -151,3 +182,11 @@ if "func" in form:
             del_player(player_name)
     elif func == "get_room_name":
         get_room_name()
+    elif func == "get_player_name":
+        get_player_name()
+    elif func == "admin_del_room":
+        room_name = form.getfirst("room_name")
+        admin_del_room(room_name)
+    elif func == "admin_del_player":
+        player_name = form.getfirst("player_name")
+        admin_del_player(player_name)

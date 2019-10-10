@@ -56,8 +56,10 @@ function append_room() {
     })
         .done(function (data) {
             console.log("ルームリストを更新しました。")
+            $(".join_room").text("");
             if (!Object.keys(data).length) {
                 console.log("現在ルームはありません。");
+                $(".join_room").append("<div class='content'><h3 class='room_name'>" + "現在作成されてるルームはありません" + "</h3></div>")
             }
             else {
                 console.log(data);
@@ -65,10 +67,9 @@ function append_room() {
             for (room_name in data) {
                 if (data[room_name] >= 5) {
                     console.log(room_name + "は満員です。");
-                    $("#room_list").append("<option disabled>" + room_name + "</option>");
+                    $(".join_room").append("<div class='content'><h3 class='room_name'>" + room_name + "</h3>" + "<h3 class='player_num'>" + "現在：" + data[room_name] + "人</h3>" + "<button class='enter_room_btn' disabled>参加</button></div>");
                 }
                 else {
-                    $("#room_list").append("<option>" + room_name + "</option>");
                     $(".join_room").append("<div class='content'><h3 class='room_name'>" + room_name + "</h3>" + "<h3 class='player_num'>" + "現在：" + data[room_name] + "人</h3>" + "<button class='enter_room_btn'>参加</button></div>");
                 }
 
@@ -82,10 +83,8 @@ function append_room() {
 // ルームを選択する
 function select_room() {
     $(document).on("click", ".enter_room_btn", function () {
-        console.log("ok");
         var urlParams = new URLSearchParams(window.location.search);
         var room_name = $(this).parent().find(".room_name").text();
-        console.log("クリックされました");
         console.log($(this));
         console.log(room_name);
         var player_name = urlParams.get("player_name");
@@ -182,6 +181,7 @@ function show_create_room() {
 function show_join_room() {
     $("#join_room_link").on("click", function (e) {
         e.preventDefault();
+        append_room();
         $(".join_room").show();
         // $("content").show();
         hide_create_room();
@@ -222,11 +222,9 @@ window.onload = function () {
     if (urlParams.get(["player_name"]) == null) {
         this.show_create_player();
         hide_contents();
-        append_room();
         console.log("プレイヤー名を入力してください。");
     }
     else {
-        this.append_room();
         hide_create_player();
         this.hide_join_room();
         this.hide_create_room();
