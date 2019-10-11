@@ -2,6 +2,7 @@ import socket
 import threading
 import requests
 import cgi
+from http.server import HTTPServer, CGIHTTPRequestHandler
 
 class SocketServer():
     def __init__(self, host, port):
@@ -63,8 +64,8 @@ class SocketServer():
                         break
 
 """
+form = cgi.FieldStorage()
 if form["host"] and form["port"]:
-    form = cgi.FieldStorage()
     host = form["host"]
     port = form["port"]
     ss = SocketServer(host, port)
