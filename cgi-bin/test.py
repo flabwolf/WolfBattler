@@ -21,3 +21,5 @@ def create_player(agent, name="Agent"):
 
 
 create_player(1, "nakahara")
+
+print("hello world")
