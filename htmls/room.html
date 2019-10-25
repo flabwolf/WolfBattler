@@ -3,28 +3,59 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="../scripts/jquery-3.4.1.min.js"></script>
-    <script src="../scripts/room.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/room.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <title>人狼バトラー（仮）</title>
 </head>
 
-<body>
-    <div class="header">
-        <h1 id="room_name"></h1>
-        <h2 id="player_name"></h2>
-    </div>
-    <div class="main">
-        <div class="contents">
+<body class="bg-secondary">
+    <header class="bg-dark">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <!-- タイトル -->
+                    <h2 class="p-3 text-danger"><strong>人狼バトラー（仮）</strong></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!-- プレイヤー名表示 -->
+                    <h5 class="float-right text-white">プレイヤー名：<span id="player_name"></span></h5>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="card mt-2">
+                        <h4 class="card-header" id="room_name"></h4>
+                        <div class="card-body" style="height: 40vh; overflow-y: scroll;" id="normal_chat_body"></div>
+                        <div class="card-footer">
+                            <form class="form-inline mx-auto">
+                                <input type="text" class="col-9 form-control" id="normal_chat_msg">
+                                <input type="submit" class="btn btn-primary ml-2" id="normal_chat_btn" value="送信">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="footer">
-        <div class="btn">
-            <form>
-                <button id="exit_room">退出</button>
-            </form>
+        <div class="container">
+            <div class="row mt-3">
+                <form-inline class="mx-auto">
+                    <button class="btn btn-danger">開始</button>
+                    <button class="btn btn-danger" id="exit_room_btn">退出</button>
+                </form-inline>
+            </div>
         </div>
-    </div>
+    </main>
+    <footer></footer>
 </body>
 
 </html>
