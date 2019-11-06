@@ -6,7 +6,7 @@ import cgitb
 # print("Content-Type: text/html\n\n")
 # form = cgi.FieldStorage()
 
-PORT = 80
+PORT = 3000
 # PORT = form.getfirst("port")
 HOST = "localhost"
 
